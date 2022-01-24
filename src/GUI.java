@@ -13,9 +13,11 @@ public final class GUI implements Runnable {
         f.add(new JLabel("Hello World"));
         f.setLocation(500, 500);
         //add button
-        JButton button = new JButton(new ButtonEventListener());
-        button.addActionListener();
+        JButton button = new JButton();
+        button.addActionListener(new ButtonEventListener());
         button.setText("woof");
+//        button.setBounds(20, 20, 20, 20);
+
         f.add(button);
         f.pack();
         f.setVisible(true);
