@@ -1,43 +1,74 @@
-import javax. swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public final class GUI extends JFrame {
-    private static JButton button = new JButton();
+public class GUI {
+    private static JPanel panel;
+    private static JTextField userText;
+    private static JPasswordField passwordText;
+    private static JLabel messageAfterLogin;
 
-    private GUI() {
-        super("doggo");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JLabel banner = new JLabel("Hello World");
-//        add(new JLabel("Hello World"));
-        banner.setForeground(Color.yellow);
-        add(new JColorChooser(banner.getForeground()));
-        setLocation(500, 500);
+   private void createUserIcons() {
+       JLabel userLabel = new JLabel("User");
+       userLabel.setBounds(20, 20, 80, 35);
+       panel.add(userLabel);
 
-        JLayeredPane pane = getLayeredPane();
-//        Figure figure = new Figure((Color.green));
+       userText = new JTextField(20);
+       userText.setBounds(120, 20, 165, 35);
+       panel.add(userText);
+   }
+
+    private void createPasswordIcons() {
+        JLabel passwordLabel = new JLabel("Password");
+        passwordLabel.setBounds(20, 70, 80, 35);
+        panel.add(passwordLabel);
+
+        passwordText = new JPasswordField(20);
+        passwordText.setBounds(120, 70, 165, 35);
+        panel.add(passwordText);
+    }
+
+    private void createButton() {
+        JButton button = new JButton();
+        button.setText("Login");
+        button.setBounds(55, 130, 80, 35);
         button.addActionListener(new ButtonEventListener());
-        button.setText("woof");
-        button.setBounds(60, 60, 60, 20);
-
-//        figure.setBounds(20, 10, 40, 60);
-//        pane.add(figure, JLayeredPane.PALETTE_LAYER);
-        pane.add(button, JLayeredPane.POPUP_LAYER);
-
-        setSize(300, 300);
-        setVisible(true);
+        panel.add(button);
     }
 
+    public GUI() {
+        JFrame frame = new JFrame("swing test");
+        frame.setSize(500, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    public static void main(String[] args) {
-//        run();
-        new GUI();
+        panel = new JPanel();
+        frame.add(panel);
+        panel.setLayout(null);
+
+        createUserIcons();
+        createPasswordIcons();
+        createButton();
+
+        messageAfterLogin = new JLabel("");
+        messageAfterLogin.setBounds(20, 180, 300, 35);
+        panel.add(messageAfterLogin);
+
+        frame.setVisible(true);
     }
+
     class ButtonEventListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String message = "meow";
-            JOptionPane.showMessageDialog(null, message, "Output", JOptionPane.PLAIN_MESSAGE);
+            if (userText.getText().equals("admin") && passwordText.getText().equals("admin")) {
+                messageAfterLogin.setText("Success!");
+                JOptionPane.showMessageDialog(null,  "meow", "Output", JOptionPane.PLAIN_MESSAGE);
+            }
+            else
+                messageAfterLogin.setText("Wrong password or login, try again");
         }
+    }
+
+    public static void main(String[] args) {
+        new GUI();
     }
 }
