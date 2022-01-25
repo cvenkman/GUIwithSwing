@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 public class GUI {
     private static JPanel panel;
     private static JTextField userText;
-    private static JPasswordField passwordText;
+    private static JTextField passwordText;
     private static JLabel messageAfterLogin;
 
    private void createUserIcons() {
